@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <button id="en-US">English</button>
+        <button id="fr-CA">French</button>
+        <button id="es-MX">Maxico</button>
+        <button id="de-DE">Germeny</button>
+
+        <p>
+            Learning a new programming language can be both challenging and rewarding. It's like embarking on a journey
+            to explore the world of code, logic, and problem-solving. With dedication and practice, you can gradually
+            unravel the syntax and concepts, and before you know it, you'll be building your own applications and
+            websites. The key is to take it step by step, practice regularly, and never shy away from asking questions
+            or seeking help when needed. Embrace the challenges, for they are the building blocks of your growth as a
+            programmer.
+        </p>
+    </div>
+    <script>
+        let btnall = document.querySelectorAll("button");
+        let browserLanguage = window.navigator.language;
+        for (var btn of btnall) {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+                var idx = this.id;
+                console.log(idx);
+                browserLanguage = `${idx}`;
+                console.log('Browser Language:', browserLanguage);
+                fetchHtml(idx);
+                updatedFunction(idx);
+            });
+        }
+        function fetchHtml(idx) {
+            let htmlc = document.querySelector("html");
+            htmlc.lang = idx;
+        }
+        function updatedFunction(idx) {
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set('buttonClicked', `${idx}`);
+            const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+            window.history.pushState({}, '', newUrl);
+        }
+
+        // function updatedFunction(idx) {
+        //     const currentParams = new URLSearchParams(window.location.search);
+        //     currentParams.set('/', `${idx}`);
+        //     const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+        //     window.location.href = newUrl;
+        // }
+    </script>
+
+</body>
+
+</html>
